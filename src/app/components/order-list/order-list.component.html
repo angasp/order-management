@@ -1,0 +1,32 @@
+<div class="order-list">
+  <h2>Order List</h2>
+
+  <!-- Display Orders if available -->
+  <table *ngIf="orders$ | async as orders; else noOrders" class="table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price per Unit</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.productName }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.pricePerUnit| currency }}</td>
+        <td>{{ order.quantity * order.pricePerUnit | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Orders Message -->
+  <ng-template #noOrders>
+    <div class="no-orders">
+      <p>No orders found. Please add some orders.</p>
+    </div>
+  </ng-template>
+</div>

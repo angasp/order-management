@@ -3,4 +3,5 @@ export interface Order {
   productName: string;
   quantity: number;
   pricePerUnit: number;
+  totalPrice: number; 
 }

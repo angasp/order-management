@@ -27,6 +27,7 @@ export class OrderFormComponent {
         productName: this.orderForm.value.productName,
         quantity: this.orderForm.value.quantity,
         pricePerUnit: this.orderForm.value.price,
+        totalPrice: this.orderForm.value.quantity * this.orderForm.value.price,
       };
 
       this.store.dispatch(addOrder({ order }));

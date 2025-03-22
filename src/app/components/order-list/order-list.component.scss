@@ -36,6 +36,39 @@
     th {
       font-size: 1.1rem;
     }
+
+    tbody tr:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+
+    tbody tr:focus {
+      outline: 2px solid #007bff;
+      background-color: #e9ecef;
+    }
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: #c82333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
   }
 
   .no-orders {
@@ -43,6 +76,18 @@
     padding: 20px;
     color: #6c757d;
     font-size: 1.2rem;
+
+    i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #adb5bd;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #007bff;
   }
 
   @media (max-width: 768px) {
@@ -50,6 +95,9 @@
 
     .table {
       font-size: 0.9rem;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
     }
   }
 }

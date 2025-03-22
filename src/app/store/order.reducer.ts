@@ -40,5 +40,14 @@ export const orderReducer = createReducer(
     ...state,
     loading: false,
     error,
+  })),
+  on(OrderActions.deleteOrderSuccess, (state, { orderId }) => ({
+    ...state,
+    orders: state.orders.filter((order) => order.id !== orderId),
+  })),
+  on(OrderActions.deleteOrderFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
   }))
 );

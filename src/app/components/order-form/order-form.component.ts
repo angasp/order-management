@@ -35,7 +35,8 @@ export class OrderFormComponent implements OnInit {
     if (this.orderForm.valid) {
       const order: Omit<Order, 'id'> = this.orderForm.value;
       this.store.dispatch(addOrder({ order }));
-      console.log("Order Submitted:", order);  
+      this.orderForm.reset(); 
+      console.log("Order Submitted:", order);
     } else {
       console.log("Form is invalid, cannot submit.");
     }

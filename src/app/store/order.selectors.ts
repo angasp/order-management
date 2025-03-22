@@ -21,3 +21,17 @@ export const selectError = createSelector(
   selectOrderState,
   (state) => state.error
 );
+
+// Select total price of all orders
+export const selectTotalPrice = createSelector(
+  selectOrderState,
+  (state) =>
+    state.orders.reduce((total, order) => total + order.quantity * order.pricePerUnit, 0)
+);
+
+// Select a specific order by ID
+export const selectOrderById = (orderId: string) =>
+  createSelector(
+    selectOrderState,
+    (state) => state.orders.find((order) => order.id === orderId)
+  );

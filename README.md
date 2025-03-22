@@ -1,27 +1,34 @@
 # OrderManagement
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+OrderManagement is an Angular-based application for managing orders. It allows users to create, view, and delete orders. The application is built using Angular, NgRx for state management, and RxJS for reactive programming.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **Create Orders**: Add new orders with product details, quantity, and price.
+- **View Orders**: View a list of all orders with calculated total prices.
+- **Delete Orders**: Remove orders from the list.
+- **State Management**: Uses NgRx for managing application state.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Before you begin, ensure you have the following installed:
 
-## Running unit tests
+- [Node.js](https://nodejs.org/) (version 14 or higher recommended)
+- [Angular CLI](https://angular.io/cli) (version 12.2.18 or higher)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Getting Started
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 1. Clone the Repository
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone https://github.com/your-username/order-management.git
+cd order-management
+npm install
+ng serve

@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Order } from '../models/order.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private orders: Order[] = [];
+  private orders: Order[] = [
+    { id: '1', productName: 'Product 1', quantity: 2, pricePerUnit: 10, totalPrice: 20 },
+    { id: '2', productName: 'Product 2', quantity: 3, pricePerUnit: 15, totalPrice: 45 },
+    { id: '3', productName: 'Product 3', quantity: 1, pricePerUnit: 20, totalPrice: 20 },
+  ];
 
   getOrders(): Observable<Order[]> {
-    return of([
-      { id: '1', productName: 'Product 1', quantity: 2, pricePerUnit: 10 },
-      { id: '2', productName: 'Product 2', quantity: 3, pricePerUnit: 15 },
-    ]); // Mock orders
-  }
-  
-
-  addOrder(order: Omit<Order, 'id'>): void {
-    const newOrder: Order = { ...order, id: this.generateUUID() };
-    this.orders.push(newOrder);
+    return of(this.orders).pipe(delay(500)); // Simulate API delay
   }
 
-  private generateUUID(): string {
-    return 'xxxx-xxxx-xxxx-xxxx'.replace(/[x]/g, () =>
-      Math.floor(Math.random() * 16).toString(16)
-    );
+  addOrder(order: Order): Observable<Order> {
+    if (!order.productName || order.quantity <= 0 || order.pricePerUnit <= 0) {
+      return throwError(() => new Error('Invalid order data'));
+    }
+    this.orders.push(order);
+    return of(order).pipe(delay(500)); // Simulate API delay
+  }
+
+  deleteOrder(orderId: string): Observable<void> {
+    const orderExists = this.orders.find((order) => order.id === orderId);
+    if (!orderExists) {
+      return throwError(() => new Error('Order not found'));
+    }
+    this.orders = this.orders.filter((order) => order.id !== orderId);
+    return of(undefined).pipe(delay(500)); // Simulate API delay
   }
 }

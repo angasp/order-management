@@ -17,7 +17,7 @@ export class OrderEffects {
         this.orderService.getOrders().pipe(
           map((orders) => OrderActions.loadOrdersSuccess({ orders })),
           catchError((error) =>
-            of(OrderActions.addOrderFailure({ error: error.message }))
+            of(OrderActions.loadOrdersFailure({ error: error.message }))
           )
         )
       )
@@ -27,13 +27,29 @@ export class OrderEffects {
   addOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(OrderActions.addOrder),
-      map(({ order }) => {
-        return OrderActions.addOrderSuccess({
-          order: { ...order, id: uuidv4() },  // Generate UUID
-        });
-      }),
-      catchError((error) =>
-        of(OrderActions.addOrderFailure({ error: error.message }))
+      switchMap(({ order }) => {
+        const newOrder = { ...order, id: uuidv4() };
+        return this.orderService.addOrder(newOrder).pipe(
+          map(() => OrderActions.addOrderSuccess({ order: newOrder })),
+          catchError((error) =>
+            of(OrderActions.addOrderFailure({ error: error.message }))
+          )
+        );
+      })
+    )
+  );
+
+  // Delete Order
+  deleteOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OrderActions.deleteOrder),
+      switchMap(({ orderId }) =>
+        this.orderService.deleteOrder(orderId).pipe(
+          map(() => OrderActions.deleteOrderSuccess({ orderId })),
+          catchError((error) =>
+            of(OrderActions.deleteOrderFailure({ error: error.message }))
+          )
+        )
       )
     )
   );
